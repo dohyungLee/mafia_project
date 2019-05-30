@@ -12,7 +12,7 @@ class check_death{
 class night{
 	public night(){
 		while(true) {
-			System.out.println("¹ãÀÌ µÇ¾ú½À´Ï´Ù.");
+			System.out.println("ë°¤ì´ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			break;
 		}
 	}
@@ -26,15 +26,18 @@ public class doctor {
 		int playnum;
 		night ng = new night();
 		
-		System.out.println("1~5 Áß ÇÃ·¹ÀÌ¾îÀÇ ¹øÈ£¸¦ ÁöÁ¤ÇØ ÁÖ¼¼¿ä.");
+		System.out.println("1~5 ì¤‘ì—ì„œ ìì‹ ì˜ í”Œë ˆì´ì–´ ë²ˆí˜¸ë¥¼ ì„¤ì •í•´ì£¼ì„¸ìš”.");
 		int [][] player = new int [5][3];
 		
 		playnum = scan.nextInt();
 		while(true) {
-			if(playnum > 5)
-				System.out.println("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+			if(playnum > 5) {
+				System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
+				playnum = scan.nextInt();
+
+			}
 			else {
-				System.out.println("´ç½ÅÀÇ ÇÃ·¹ÀÌ¾î ¹øÈ£´Â " + playnum + "¹ø ÀÔ´Ï´Ù.");
+				System.out.println("ìì‹ ì˜ í”Œë ˆì´ì–´ ë²ˆí˜¸ëŠ” " + playnum + " ë²ˆ ì…ë‹ˆë‹¤.");
 				break;
 			}
 		}
@@ -47,27 +50,27 @@ public class doctor {
             }	
 		}
 		
-		//°ª È®ÀÎ¿ë...
+		//ê°’ í™•ì¸ìš©...
 		//for(int i = 0; i < 5; i++)
-		//System.out.println("player["+i+"]"+"[0] ÀÇ °ª : " + player[i][0]);
+		//System.out.println("player["+i+"]"+"[0]ì˜ ê°’ : " + player[i][0]);
 		
 		System.out.println("");
 		
 		switch(player[playnum][0]) {
 		case 1:
-			System.out.println("´ç½ÅÀÇ Á÷¾÷Àº ¸¶ÇÇ¾Æ ÀÔ´Ï´Ù.");
+			System.out.println("ë‹¹ì‹ ì€ ë§ˆí”¼ì•„ ì…ë‹ˆë‹¤.");
 			break;
 		case 2:
-			System.out.println("´ç½ÅÀÇ Á÷¾÷Àº °æÂû ÀÔ´Ï´Ù.");
+			System.out.println("ë‹¹ì‹ ì€ ê²½ì°° ì…ë‹ˆë‹¤.");
 			break;
 		case 3:
-			System.out.println("´ç½ÅÀÇ Á÷¾÷Àº ÀÇ»ç ÀÔ´Ï´Ù.");
+			System.out.println("ë‹¹ì‹ ì€ ì˜ì‚¬ ì…ë‹ˆë‹¤.");
 			break;
 		case 4:
-			System.out.println("´ç½ÅÀÇ Á÷¾÷Àº ½Ã¹Î1 ÀÔ´Ï´Ù.");
+			System.out.println("ë‹¹ì‹ ì€ ì‹œë¯¼1 ì…ë‹ˆë‹¤.");
 			break;
 		case 5:
-			System.out.println("´ç½ÅÀÇ Á÷¾÷Àº ½Ã¹Î2 ÀÔ´Ï´Ù.");
+			System.out.println("ë‹¹ì‹ ì€ ì‹œë¯¼2 ì…ë‹ˆë‹¤.");
 			break;
 		}
 		
