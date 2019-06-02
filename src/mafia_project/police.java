@@ -1,38 +1,33 @@
 package mafia_project;
 
+import mafia_project.*;
+import java.util.Scanner;
 
 public class police {
-	
-  public void reveal(int revealnum) {
-	Scanner input = new Scanner(System.in);
-	  
-	while(true) {
-	  revealnum = input.nextInt();
+	public void investigation() {
+		Scanner scan = new Scanner(System.in);
 		
-	  if(revealnum > 4) {
-	    System.out,println("존재하지 않는 플레이어입니다.");
-	  }
-	  else if(player[revealnum][1] == 0) {
-		System.out.println("이미 사망한 플레이어입니다.");
-	  }
-	  else {  // 플레이어넘버 1열 더 추가해야? 플레이어번호와 플레이어 직업은 별개 > 매 게임마다 다름
-		if(revealnum == 0 ) {
-		  System.out.println(revealnum + "번 플레이어의 직업은 마피아입니다.");
+		System.out.println("정체를 알고 싶은 플레이어를 선택하세요.");
+		int suspect = scan.nextInt();
+		
+		while(true) {
+			if(chairman.player[suspect][1] != 0) {
+				switch(chairman.player[suspect][0]) {
+					case 1:
+						System.out.println("지목한 플레이어는 마피아 입니다.");
+						break;
+					case 3:
+						System.out.println("지목한 플레이어는 의사 입니다.");
+						break;
+					default:
+						System.out.println("지목한 플레이어는 시민입니다.");
+						break;	
+				}
+			}
+			else {
+				System.out.println("지목한 플레이어는 이미 죽었습니다.");
+			}
 		}
-		else if(revealnum == 1 ) {
-		  System.out.println(revealnum + "번 플레이어의 직업은 마피아입니다.");
-		}
-		else if(revealnum == 2 ) {
-		  System.out.println(revealnum + "번 플레이어의 직업은 마피아입니다.");
-		}
-		else if(revealnum == 3 ) {
-		  System.out.println(revealnum + "번 플레이어의 직업은 마피아입니다.");
-		}
-		else if(revealnum == 4 ) {
-		  System.out.println(revealnum + "번 플레이어의 직업은 마피아입니다.");
-		}
-		break;
-	  }
 	}
-  }
+
 }
