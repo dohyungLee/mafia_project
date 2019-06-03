@@ -43,9 +43,8 @@ public class mafia {
 			else if(chairman.player[comkill][1] == 0) {
 				comkill = randomkl.nextInt(6)+1;//랜덤선택
 			}
-			else {
-				
-			}
 		}
+		for(int i = 0; i < 5; i++)
+			chairman.player[i][4] = 1;
 	}
 }

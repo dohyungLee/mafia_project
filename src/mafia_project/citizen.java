@@ -22,6 +22,11 @@ public class citizen {
 				System.out.println("존재하지 않는 플레이어 입니다.");
 				votenumber = input.nextInt();
 			}
+			else if(chairman.player[votenumber-1][1] == 0) {
+				System.out.println("이미 죽은 플레이어 입니다.");
+				System.out.println("다시 투표해 주세요.");
+				votenumber = input.nextInt();
+			}
 			else {
 				chairman.player[votenumber-1][3] ++;//투표
 				break;

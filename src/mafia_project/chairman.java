@@ -29,10 +29,21 @@ public class chairman {
 		}
 	}
 	
+	public void playerdeath() {
+		for(int i = 0; i < 5; i++) {
+			if(player[i][2] == 1 && player[i][1] == 0) {
+				System.out.println("당신은 컴퓨터에게 패배했습니다.");
+				System.out.println("게임이 종료되었습니다.");
+			}
+		}
+	}
+	
 	public void deathcheck() {
 		for(int i = 0; i < 5; i++) {
 			if(player[i][4] == 0) {
 				player[i][1] = 0;
+				
+			System.out.println(i + "번 플레이어가 마피아의 손에 살해당했습니다.");
 			}
 		}
 	}
@@ -60,11 +71,16 @@ public class chairman {
 	public void execution(){
 		int whoM = 0;
 		chairman Revote = new chairman();
+			for(int i = 0; i < 4; i++) { // 사형 집행
+				if(player[whoM][3] < player[i+1][3]) // 최대값 구하기
+					whoM = i+1;
+			}
 		
-		for(int i = 0; i < 4; i++) {
-			if(player[whoM][3] < player[i+1][3])
-				whoM = i+1;
-		}
+			for(int j = 0; j < 4; j++) { //최댓값 중복시 재투표
+				if(player[whoM][3] == player[j][3]) {
+					Revote.revote();
+				}
+			}
 		System.out.println("\n투표 결과");
 		System.out.println("플레이어"+ (whoM+1) + " : 사형\n");
 		
@@ -74,6 +90,8 @@ public class chairman {
 	public void night() {
 		doctor Heal = new doctor();
 		mafia Kill = new mafia();
+		chairman Deathcheck = new chairman();
+		chairman Playerdeath = new chairman();
 		police Investigation = new police();
 		
 		System.out.println(countnight + " 번째 밤이 되었습니다.\n");
@@ -95,13 +113,20 @@ public class chairman {
 				
 			case 3:
 				//의사 밤 행동 영역
-				Heal.heal();
 				Kill.randomkill();
+				Heal.heal();
 				break;
+				
+			default : 
+				Kill.randomkill();
+				Heal.randomheal();
 				
 			}
 		}
 		countnight++;
+		
+		Deathcheck.deathcheck();
+		Playerdeath.playerdeath();
 	}
 	
 	public void day() {
@@ -109,6 +134,7 @@ public class chairman {
 		chairman Execution = new chairman();
 		chairman Randomvote = new chairman();
 		chairman Check = new chairman();
+		chairman Playerdeath = new chairman();
 		
 		System.out.println(countday + " 번째 낮이 되었습니다.\n");
 		
@@ -132,6 +158,8 @@ public class chairman {
 		Check.check();
 		
 		countday++;
+		
+		Playerdeath.playerdeath();
 	}
 	
 	public void check() {
@@ -222,6 +250,7 @@ public class chairman {
 		
 		for(int i = 0; i < 5; i++) {
 			player[i][1] = 1; // 모든사람 생존 초기화
+			player[i][4] = 1;
 		}	
 		
 		while(true) {
