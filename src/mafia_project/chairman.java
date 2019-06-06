@@ -30,11 +30,14 @@ public class chairman {
 	}
 	
 	public void playerdeath() {
+		chairman Error = new chairman();
+		
 		for(int i = 0; i < 5; i++) {
 			if(player[i][2] == 1 && player[i][1] == 0) {
 				System.out.println("당신은 컴퓨터에게 패배했습니다.");
 				System.out.println("게임이 종료되었습니다.");
-				break;
+				Error.error();
+				
 			}
 		}
 	}

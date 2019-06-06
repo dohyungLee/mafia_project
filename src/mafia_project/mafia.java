@@ -45,7 +45,7 @@ public class mafia {
 			
 		comkill = randomkl.nextInt(5);//랜덤선택
 		while(true) {
-			if(chairman.player[comkill][2] == 1 && chairman.player[comkill][4] == 1) {
+			if(chairman.player[comkill][1] == 1) {
 				System.out.println("마피아가 총을 쏘았습니다.");
 				chairman.player[comkill][4] = 0;
 				break;

@@ -10,9 +10,8 @@ public class police {
 		System.out.println("정체를 알고 싶은 플레이어를 선택하세요.");
 		int suspect = scan.nextInt();
 		
-		while(true) {
-			if(chairman.player[suspect][1] != 0) {
-				switch(chairman.player[suspect][0]) {
+			if(chairman.player[suspect-1][1] != 0) {
+				switch(chairman.player[suspect-1][0]) {
 					case 1:
 						System.out.println("지목한 플레이어는 마피아 입니다.");
 						break;
@@ -26,8 +25,8 @@ public class police {
 			}
 			else {
 				System.out.println("지목한 플레이어는 이미 죽었습니다.");
+				suspect = scan.nextInt();
 			}
-		}
 	}
 
 }
