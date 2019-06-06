@@ -34,16 +34,17 @@ public class chairman {
 			if(player[i][2] == 1 && player[i][1] == 0) {
 				System.out.println("당신은 컴퓨터에게 패배했습니다.");
 				System.out.println("게임이 종료되었습니다.");
+				break;
 			}
 		}
 	}
 	
 	public void deathcheck() {
 		for(int i = 0; i < 5; i++) {
-			if(player[i][4] == 0) {
+			if(player[i][4] == 0 && player[i][1] == 1) {
 				player[i][1] = 0;
 				
-			System.out.println(i + "번 플레이어가 마피아의 손에 살해당했습니다.");
+			System.out.println((i+1) + "번 플레이어가 마피아의 손에 살해당했습니다.");
 			}
 		}
 	}
@@ -52,7 +53,7 @@ public class chairman {
 		chairman Randomvote = new chairman();
 		citizen Vote = new citizen();
 		
-		System.out.println("재투표 하겠습니다.\n");
+		System.out.println("\n재투표 하겠습니다.\n");
 		Randomvote.randomvote();
 		
 		System.out.println("컴퓨터의 투표결과");
@@ -76,15 +77,20 @@ public class chairman {
 					whoM = i+1;
 			}
 		
-			for(int j = 0; j < 4; j++) { //최댓값 중복시 재투표
+			/*for(int j = 0; j < 4; j++) { //최댓값 중복시 재투표
 				if(player[whoM][3] == player[j][3]) {
 					Revote.revote();
+					break;
 				}
-			}
+			}*/
 		System.out.println("\n투표 결과");
 		System.out.println("플레이어"+ (whoM+1) + " : 사형\n");
 		
 		player[whoM][1] = 0;
+		
+		for(int k = 0; k < 5; k++) {
+			player[k][3] = 0;
+		}
 	}
 	
 	public void night() {
@@ -93,6 +99,7 @@ public class chairman {
 		chairman Deathcheck = new chairman();
 		chairman Playerdeath = new chairman();
 		police Investigation = new police();
+		chairman Check  = new chairman();
 		
 		System.out.println(countnight + " 번째 밤이 되었습니다.\n");
 		
@@ -101,31 +108,41 @@ public class chairman {
 			case 1:
 				//마피아 밤 행동 영역
 				Kill.kill();
+				Check.check();
 				Heal.randomheal();
+				Check.check();
 				break;
 				
 			case 2:
 				//경찰 밤 행동 영역
 				Investigation.investigation();
+				Check.check();
 				Kill.randomkill();
+				Check.check();
 				Heal.randomheal();
+				Check.check();
 				break;
 				
 			case 3:
 				//의사 밤 행동 영역
 				Kill.randomkill();
+				Check.check();
 				Heal.heal();
+				Check.check();
 				break;
 				
 			default : 
 				Kill.randomkill();
+				Check.check();
 				Heal.randomheal();
+				Check.check();
 				
 			}
 		}
 		countnight++;
 		
 		Deathcheck.deathcheck();
+		Check.check();
 		Playerdeath.playerdeath();
 	}
 	
@@ -139,15 +156,16 @@ public class chairman {
 		System.out.println(countday + " 번째 낮이 되었습니다.\n");
 		
 		Randomvote.randomvote();
+		Check.check();
 		
 		System.out.println("컴퓨터의 투표결과");
 		for(int i = 0; i < 5; i++)
-			System.out.println("플레이어 "+ (i+1) +" 의 득표 :"
-					+ " " + player[i][3]);
+			System.out.println("플레이어 "+ (i+1) +" 의 득표 :" + " " + player[i][3]);
 		
 		System.out.println(" ");
 		
 		Vote.vote();
+		Check.check();
 		
 		System.out.println("\n최종 투표결과");
 		for(int i = 0; i < 5; i++)
@@ -187,6 +205,7 @@ public class chairman {
 		chairman Check = new chairman();
 		chairman Execution =  new chairman();
 		chairman Error = new chairman();
+		chairman Playerdeath = new chairman();
 		
 		for(int i = 0; i < player.length; i++) {
 			for(int j = 0; j < player[i].length; j++) {
@@ -254,7 +273,12 @@ public class chairman {
 		}	
 		
 		while(true) {
+			Playerdeath.playerdeath();
+			
 			Day.day();
+			
+			Playerdeath.playerdeath();
+			
 			Night.night();
 			
 			Check.check();

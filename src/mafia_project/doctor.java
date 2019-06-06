@@ -25,7 +25,7 @@ public class doctor {
 			}
 		
 			else if(chairman.player[healnumber-1][4] == 0){
-				System.out.println("총에 맞은 " + (healnumber-1) + "번 플레이어를 살렸습니다.");
+				System.out.println("총에 맞은 " + (healnumber) + "번 플레이어를 살렸습니다.");
 				chairman.player[healnumber-1][4] = 1; //치료
 				break;
 			}
@@ -41,7 +41,7 @@ public class doctor {
 		Random randomhl = new Random();
 		int comheal;
 		
-		comheal = randomhl.nextInt(6)+1;//랜덤선택
+		comheal = randomhl.nextInt(5);//랜덤선택
 		while(true) {
 			if(chairman.player[comheal][2] == 1) {
 				chairman.player[comheal][4] = 1;
@@ -49,7 +49,7 @@ public class doctor {
 				break;
 			}
 			else {
-				comheal = randomhl.nextInt(6)+1;//랜덤선택
+				comheal = randomhl.nextInt(5);//랜덤선택
 			}
 		}
 	}
