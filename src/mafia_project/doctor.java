@@ -9,6 +9,7 @@ public class doctor {
 
 	public void heal() {
 		Scanner input = new Scanner(System.in);
+		chairman Delay = new chairman();
 		
 		int healnumber = 0;
 		System.out.println("치료할 사람을 정하세요");
@@ -27,6 +28,7 @@ public class doctor {
 			else if(chairman.player[healnumber-1][4] == 0){
 				System.out.println("총에 맞은 " + (healnumber) + "번 플레이어를 살렸습니다.");
 				chairman.player[healnumber-1][4] = 1; //치료
+				Delay.delay2();
 				break;
 			}
 			else {
@@ -39,16 +41,21 @@ public class doctor {
 
 	public void randomheal() {
 		Random randomhl = new Random();
+		chairman Delay = new chairman();
 		int comheal;
 		
 		comheal = randomhl.nextInt(5);//랜덤선택
 		while(true) {
-			if(chairman.player[comheal][2] == 1) {
+			if(chairman.player[comheal][1] == 1) {
+				if(chairman.player[comheal][1] == 1 && chairman.player[comheal][4] == 0)
+					System.out.println("의사가 총에 맞은 플레이어를 치료하였습니다.");
+				
 				chairman.player[comheal][4] = 1;
-				System.out.println("의사가 사람을 치료하였습니다.");
+				
+				Delay.delay2();
 				break;
 			}
-			else {
+			else if(chairman.player[comheal][4] == 1){
 				comheal = randomhl.nextInt(5);//랜덤선택
 			}
 		}

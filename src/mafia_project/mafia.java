@@ -7,6 +7,7 @@ import mafia_project.*;
 public class mafia {
 	public void kill() {
 		Scanner scan = new Scanner(System.in);
+		chairman Delay = new chairman();
 		int death;
 		
 		System.out.println("죽일 플레이어를 고르세요.");
@@ -16,6 +17,7 @@ public class mafia {
 			if(chairman.player[death-1][1] == 1) {
 				System.out.println(death + "번 플레이어를 총으로 쏘았습니다.\n");
 				chairman.player[death-1][4] = 0;
+				Delay.delay2();
 				break;
 			}
 			
@@ -41,6 +43,7 @@ public class mafia {
 	
 	public void randomkill() {			
 		Random randomkl = new Random();
+		chairman Delay = new chairman();
 		int comkill;
 			
 		comkill = randomkl.nextInt(5);//랜덤선택
@@ -48,9 +51,10 @@ public class mafia {
 			if(chairman.player[comkill][1] == 1) {
 				System.out.println("마피아가 총을 쏘았습니다.");
 				chairman.player[comkill][4] = 0;
+				Delay.delay2();
 				break;
 			}
-			else if(chairman.player[comkill][1] == 0) {
+			else if(chairman.player[comkill][1] == 0 || chairman.player[comkill][0] == 1) {
 				comkill = randomkl.nextInt(5);//랜덤선택
 			}
 		}

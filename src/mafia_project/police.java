@@ -20,7 +20,7 @@ public class police {
 						break;
 					default:
 						System.out.println("지목한 플레이어는 시민입니다.");
-						break;	
+						break;
 				}
 			}
 			else {

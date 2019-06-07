@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class chairman {
-	public static int playnum = 0, errorcode = 0, countday = 1, countnight = 1;
+	public static int playnum = 0, errorcode = 0, countday = 1, countnight = 1, countturn = 0;
 	public static int [][] player = new int [5][5];
 	
 	/*1열은 직업, 2열은 생존여부, 3열은 플레이어 컴퓨터 여부, 4열은 투표, 5열은 마피아가 찍은 사람*/
@@ -13,34 +13,48 @@ public class chairman {
 	//투표는 컴퓨터는 2표씩 주었음. 그냥 표가 너무 적어서.
 	
 	
-	public void randomvote() {
-		Random randomvt = new Random();
-		int comvote;
-		
-		for(int k = 0; k < 5; k++) {
-			player[k][3] = 0;
+	public void delay1() {
+		try {
+			Thread.sleep(1000);
+		} 
+		catch (InterruptedException e) {
+			System.out.println(e.getMessage());    //sleep 메소드가 발생시키는 InterruptedException
 		}
-
-		for(int j=0; j < 2; j++) {
-			for(int i = 0; i < 4; i++) {
-				comvote = randomvt.nextInt(5);//랜덤 투표
-				player[comvote][3] ++;
-			}
+	}
+	
+	public void delay2() {
+		try {
+			Thread.sleep(2000);
+		} 
+		catch (InterruptedException e) {
+			System.out.println(e.getMessage());    //sleep 메소드가 발생시키는 InterruptedException
 		}
 	}
 	
 	public void playerdeath() {
-		chairman Error = new chairman();
+		murderer Serialmurder = new murderer();
+		chairman Delay = new chairman();
 		
 		for(int i = 0; i < 5; i++) {
 			if(player[i][2] == 1 && player[i][1] == 0) {
-				System.out.println("당신은 컴퓨터에게 패배했습니다.");
-				System.out.println("게임이 종료되었습니다.");
-				Error.error();
 				
+				Serialmurder.serialmurder();
+				
+				System.out.println("당신은 컴퓨터에게 패배했습니다.");
+				Delay.delay2();
+				System.out.println("게임이 종료되었습니다.");
+				System.exit(0);
 			}
 		}
 	}
+	
+	/*public void playerwin() {
+		chairman Error = new chairman();
+		
+		for(int i = 0; i < 5; i++) {
+			if(player[i])
+		}
+	}*/
 	
 	public void deathcheck() {
 		for(int i = 0; i < 5; i++) {
@@ -53,8 +67,8 @@ public class chairman {
 	}
 	
 	public void revote() {
-		chairman Randomvote = new chairman();
 		citizen Vote = new citizen();
+		citizen Randomvote = new citizen();
 		
 		System.out.println("\n재투표 하겠습니다.\n");
 		Randomvote.randomvote();
@@ -111,55 +125,44 @@ public class chairman {
 			case 1:
 				//마피아 밤 행동 영역
 				Kill.kill();
-				Check.check();
 				Heal.randomheal();
-				Check.check();
 				break;
 				
 			case 2:
 				//경찰 밤 행동 영역
 				Investigation.investigation();
-				Check.check();
 				Kill.randomkill();
-				Check.check();
 				Heal.randomheal();
-				Check.check();
 				break;
 				
 			case 3:
 				//의사 밤 행동 영역
 				Kill.randomkill();
-				Check.check();
 				Heal.heal();
-				Check.check();
 				break;
 				
 			default : 
 				Kill.randomkill();
-				Check.check();
 				Heal.randomheal();
-				Check.check();
 				
 			}
 		}
 		countnight++;
 		
 		Deathcheck.deathcheck();
-		Check.check();
 		Playerdeath.playerdeath();
 	}
 	
 	public void day() {
 		citizen Vote = new citizen();
 		chairman Execution = new chairman();
-		chairman Randomvote = new chairman();
+		citizen Randomvote = new citizen();
 		chairman Check = new chairman();
 		chairman Playerdeath = new chairman();
 		
 		System.out.println(countday + " 번째 낮이 되었습니다.\n");
 		
 		Randomvote.randomvote();
-		Check.check();
 		
 		System.out.println("컴퓨터의 투표결과");
 		for(int i = 0; i < 5; i++)
@@ -168,15 +171,12 @@ public class chairman {
 		System.out.println(" ");
 		
 		Vote.vote();
-		Check.check();
 		
 		System.out.println("\n최종 투표결과");
 		for(int i = 0; i < 5; i++)
 			System.out.println("플레이어 "+ (i+1) +" 의 득표 : " + player[i][3]);
 		
 		Execution.execution();
-		
-		Check.check();
 		
 		countday++;
 		
@@ -192,10 +192,6 @@ public class chairman {
 		}
 	}
 	
-	public void error() {
-		System.out.println("Hello World!");
-	}
-	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		Random random = new Random();
@@ -207,8 +203,10 @@ public class chairman {
 		chairman Night = new chairman();
 		chairman Check = new chairman();
 		chairman Execution =  new chairman();
-		chairman Error = new chairman();
 		chairman Playerdeath = new chairman();
+		chairman Delay = new chairman();
+		murderer News = new murderer();
+		
 		
 		for(int i = 0; i < player.length; i++) {
 			for(int j = 0; j < player[i].length; j++) {
@@ -238,6 +236,7 @@ public class chairman {
 
 			}
 			else {
+				Delay.delay2();
 				System.out.println("자신의 플레이어 번호는 " + playnum + " 번 입니다.\n");
 				break;
 			}
@@ -278,21 +277,27 @@ public class chairman {
 		while(true) {
 			Playerdeath.playerdeath();
 			
-			Day.day();
-			
+			if(countturn == 1) {
+				News.news();
+			}
+				
+			Night.night();
 			Playerdeath.playerdeath();
 			
-			Night.night();
+			System.out.println(" ");
+			Delay.delay2();
+			
+			Day.day();
+			Delay.delay2();
+			
+			countturn ++;
+			Playerdeath.playerdeath();
 			
 			Check.check();
-			System.out.println(" ");
 			
-			//에러를 내고 싶을 땐 errorcode를 1로 설정
+			Delay.delay2();
 			
-			if(errorcode == 1) {
-				Error.error();
-				break;
-			}
 		}	
 	}
 }
+	
